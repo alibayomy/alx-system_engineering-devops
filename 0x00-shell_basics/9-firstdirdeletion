@@ -1,2 +1,6 @@
 #!/bin/bash
+<<<<<<< HEAD
 rm -ref  /tmp/my_first_directory
+=======
+rm -rf /tmp/my_first_directory
+>>>>>>> f84f018fb3277f4cf4ee2c5d3fe5fd76393b4488
