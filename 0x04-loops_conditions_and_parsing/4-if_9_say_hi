@@ -6,8 +6,8 @@ while [ $i -lt 10 ]
 do
     if [ $i -eq 8 ]
     then
+	echo "Best School"
         echo "Hi"
-	echo
     else
         echo "Best School"
     fi
