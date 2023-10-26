@@ -7,6 +7,7 @@ do
     if [ $i -eq 8 ]
     then
         echo "Hi"
+	echo
     else
         echo "Best School"
     fi
