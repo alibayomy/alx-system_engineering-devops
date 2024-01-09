@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# installs nginx and show a simple hello world on the server.
+# installs nginx and show a simple hello world on the server .
 
 apt-get -y update
 apt-get -y install nginx
