@@ -1,4 +1,5 @@
-un: ./1-world_wide_web <domain> <subdomain>
+#!/usr/bin/env bash
+# For Run: ./1-world_wide_web <domain> <subdomain>
 
 domain_information() {
     local subdomain="${1}"
