@@ -4,22 +4,19 @@
 domain_information() {
     local subdomain="${1}"
     local domain="${2}"
-    local record_type
-    local destination
 
-    record_type="$(dig "${subdomain}.${domain}" | grep -A1 'ANSWER SECTION:' | awk '{print $4}' | tr -d '\n')"
-    destination="$(dig "${subdomain}.${domain}" | grep -A1 'ANSWER SECTION:' | awk '{print $5}' | tr -d '\n')"
-    echo "The subdomain ${subdomain} is a ${record_type} record and points to ${destination}"
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+    else
+        subdomains=("$subdomain")
+    fi
+
+    for sub in "${subdomains[@]}"; do
+        record_type=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $4 }')
+        destination=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $5 }')
+        echo "The subdomain $sub is a $record_type record and points to $destination"
+    done
 }
 
-domain="${1}"
-
-if [[ $# -eq 1 ]]; then
-    domain_information "www" "${domain}"
-    domain_information "lb-01" "${domain}"
-    domain_information "web-01" "${domain}"
-    domain_information "web-02" "${domain}"
-elif [[ $# -eq 2 ]]; then
-    subdomain="${2}"
-    domain_information "${subdomain}" "${domain}"
-fi
+domain_information "$1" "$2"
