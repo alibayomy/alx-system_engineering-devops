@@ -7,20 +7,19 @@ apt-get install -y haproxy
 echo "frontend http-in
         bind *:80
         mode http
-        default_backend backend-servers
+        default_backend servers
 
 frontend load_balancer
         bind *:80
         mode http
-        balance roundrobin
         option httpclose
         option forwardfor
-        server 454157-web-01 54.237.84.15 check
-        server 454157-web-02 3.89.155.134 check
+        default_backend servers
 
-backend backend-servers
-        server 454157-web-01 54.237.84.15 check
-        server 454157-web-02 3.89.155.134 check
+backend servers
+        balance roundrobin
+        server 454157-web-01 54.237.84.15:80 check
+        server 454157-web-02 3.89.155.134:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 service haproxy start
