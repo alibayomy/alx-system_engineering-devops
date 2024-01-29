@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ using this REST APIFor a given employee ID, returns information about
-their todo list progress"""
+their TODO list progress """
 
 import requests
 import sys
@@ -11,7 +11,7 @@ if __name__ == "__main__":
     user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                         .format(userId))
 
-    userName = user.json().get('name')
+    name = user.json().get('name')
 
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')
     totalTasks = 0
@@ -24,7 +24,7 @@ if __name__ == "__main__":
                 completed += 1
 
     print('Employee {} is done with tasks({}/{}):'
-          .format(userName, completed, totalTasks))
+          .format(name, completed, totalTasks))
 
     print('\n'.join(["\t " + task.get('title') for task in todos.json()
           if task.get('userId') == int(userId) and task.get('completed')]))
